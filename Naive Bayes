@@ -1,0 +1,51 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+
+df = pd.read_csv("maharashtra_irrigation_dataset_with_outcome.csv")
+
+df.isnull().sum()        #check for null values
+df.shape       #print number of rows and columns
+df.head()
+
+#Visualise the dataset
+class_survive = df[df['Outcome'] == 1]  # Crop survives
+class_fail = df[df['Outcome'] == 0]     # Crop fails
+
+# Plot
+plt.figure(figsize=(8, 6))
+plt.title("Crop Survival Based on Soil Moisture and Temperature")
+plt.xlabel("Soil Moisture (%)")
+plt.ylabel("Temperature (°C)")
+
+plt.scatter(class_survive['Soil Moisture (%)'], class_survive['Temperature (°C)'],
+            color="green", label="Crop Survives (1)", alpha=0.6)
+
+plt.scatter(class_fail['Soil Moisture (%)'], class_fail['Temperature (°C)'],
+            color="red", label="Crop Fails (0)", alpha=0.8)
+
+plt.legend()
+plt.show()
+
+#Performing feature scaling to improve accuracy
+X = df.drop(columns=['Outcome','Location','Date','Growth Stage', 'Crop','Precipitation (mm)','Irrigation Applied (mm)', 'Solar Radiation (W/m²)', 'Wind Speed (m/s)'])
+y = df['Outcome']
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+from sklearn.naive_bayes import GaussianNB
+classifier = GaussianNB()
+
+classifier.fit(X_train,y_train)
+
+y_pred = classifier.predict(X_test)
+from sklearn.metrics import confusion_matrix
+confusion_matrix = confusion_matrix(y_test,y_pred)
+print(confusion_matrix)
+
+from sklearn.metrics import classification_report
+print(classification_report(y_test,y_pred))
