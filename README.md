@@ -10,12 +10,12 @@ Agri-Aqua is a smart irrigation system that uses machine learning models to pred
 ✅ Seamless integration between frontend, backend, and ML models. <br />
 
 ### Tech Stack
-Frontend: HTML, CSS, JavaScript
-Backend: Python, Flask
-ML Libraries: scikit-learn, Pandas, NumPy
+Frontend: HTML, CSS, JavaScript. <br />
+Backend: Python, Flask. <br />
+ML Libraries: scikit-learn, Pandas, NumPy. <br />
 
 ### How It Works
-Users input key parameters like soil type, moisture, weather forecast, and crop type.
-The system processes this data through trained ML models.
-It returns a prediction on whether the crop is likely to survive under the given conditions.
-The results help guide irrigation planning and water management.
+Users input key parameters like soil type, moisture, weather forecast, and crop type. <br />
+The system processes this data through trained ML models. <br />
+It returns a prediction on whether the crop is likely to survive under the given conditions. <br />
+The results help guide irrigation planning and water management. <br />
